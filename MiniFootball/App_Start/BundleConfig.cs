@@ -31,8 +31,8 @@ namespace MiniFootball
 					  "~/Content/site.css"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
+					  "~/Content/Site.css",
 					  "~/Content/bootstrap.css",
-					  "~/Content/site.css",
 					  "~/Content/jquery-ui.css",
 					  "~/Content/jquery-ui.min.css",
 					  "~/Content/jquery-ui.structure.css",

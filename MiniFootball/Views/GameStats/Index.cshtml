@@ -5,6 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+	var date = Model.Select(s => s.Game.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd");
+	var firstPlace = Model.Where(f => f.Points == 3).ToList();
+	var secondPlace = Model.Where(s => s.Points == 1).ToList();
+	var thirdPlace = Model.Where(t => t.Points == 0).ToList();
+}
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -19,9 +26,6 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h3>
-				@{
-					var date = Model.Select(s => s.Game.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd");
-				}
 				@Html.DisplayFor(d => date)
 			</h3>
 		</div>
@@ -44,7 +48,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach (var item in Model)
+					<tr><th class="team" colspan="3">First Team</th></tr>
+					@foreach (var item in firstPlace)
 					{
 						<tr>
 							<td>
@@ -57,6 +62,57 @@
 								@Html.DisplayFor(modelItem => item.Points)
 							</td>
 						</tr>
+					}
+					@if (secondPlace.Any())
+					{
+						<tr><th class="team" colspan="3">Second Team</th></tr>
+						foreach (var item in secondPlace)
+						{
+							<tr>
+								<td>
+									@Html.DisplayFor(modelItem => item.Player.Name) @Html.DisplayFor(modelItem => item.Player.Surname)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Goals)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Points)
+								</td>
+							</tr>
+						}
+						<tr><th class="team" colspan="3">Third Team</th></tr>
+						foreach (var item in thirdPlace)
+						{
+							<tr>
+								<td>
+									@Html.DisplayFor(modelItem => item.Player.Name) @Html.DisplayFor(modelItem => item.Player.Surname)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Goals)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Points)
+								</td>
+							</tr>
+						}
+					}
+					else
+					{
+						<tr><th class="team" colspan="3">Second Team</th></tr>
+						foreach (var item in thirdPlace)
+						{
+							<tr>
+								<td>
+									@Html.DisplayFor(modelItem => item.Player.Name) @Html.DisplayFor(modelItem => item.Player.Surname)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Goals)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Points)
+								</td>
+							</tr>
+						}
 					}
 				</tbody>
 			</table>
