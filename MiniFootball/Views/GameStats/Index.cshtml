@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MiniFootball.Models.GameStats>
+
+@{
+    ViewBag.Title = "Game Statistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>
+					Game Statistics<br />
+				</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h3>
+				@{
+					var date = Model.Select(s => s.Game.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd");
+				}
+				@Html.DisplayFor(d => date)
+			</h3>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Player
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Goals)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Points)
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.Player.Name) @Html.DisplayFor(modelItem => item.Player.Surname)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Goals)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Points)
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
