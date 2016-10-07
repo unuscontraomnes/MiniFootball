@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
+using System.Linq;
 using MiniFootball.Models;
 
 namespace MiniFootball.Controllers
@@ -21,12 +22,12 @@ namespace MiniFootball.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var player = await db.Players.FindAsync(id);
-            if (player == null)
+			var stats = db.Stats.Where(p => p.PlayerId == id).Include(s => s.Player).FirstOrDefaultAsync();
+			if (stats == null)
             {
                 return HttpNotFound();
             }
-            return View(player);
+			return View(await stats);
         }
 
         protected override void Dispose(bool disposing)
