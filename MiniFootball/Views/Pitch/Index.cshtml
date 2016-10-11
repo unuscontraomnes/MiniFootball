@@ -1,0 +1,33 @@
+﻿@{
+	ViewBag.Title = "Pitch";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD43k-Uq5bEz0ID-sEAHKYl31C1q95szU" type="text/javascript"></script>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>
+					Our Pitch
+				</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<address>
+				<strong>Fitness House</strong><br/> Большая Разночинная ул., 25<br/> Санкт-Петербург<br/> <abbr title="Phone">Тел:</abbr> 8 (812) 610-06-06<br/>
+				<a href="https://join.skype.com/c8jAQHON5lGo"><img src="../../Content/images/skype_icon.svg" width="16" height="16"/> Наш чатик в скайпе</a>
+				<p class="italicFont">Ключ спрашивать в чатике или попросить пропустить на ресепшене.</p>
+			</address>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="map_canvas" style="height: 600px;"></div>
+		</div>
+	</div>
+</div>
