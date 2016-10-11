@@ -41,3 +41,7 @@ textarea {
 .italicFont {
 	font-style: italic !important;
 }
+
+.gameList {
+	margin: 0 0 5px 0 !important;
+}

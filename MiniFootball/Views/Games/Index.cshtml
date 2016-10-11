@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MiniFootball.Models.Games>
+﻿@using System.Globalization
+@model IEnumerable<MiniFootball.Models.Games>
 
 @{
     ViewBag.Title = "Games";
@@ -18,42 +19,19 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>
-							#
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Date)
-						</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model)
-					{
-						<tr>
-							<td>
-								@Html.DisplayFor(modelItem => item.GameId)
-							</td>
-							<td>
-								@{
-									var date = item.Date.ToString("d MMMM yyyy");
-								}
-								@Html.DisplayFor(d => date)
-							</td>
-							<td>
-								<div class="btn-group btn-group-xs">
-									<button class="btn btn-warning" type="button" onclick="location.href='@Url.Action("Index", "GameStats", new { id = item.GameId })'">
-										<em class="glyphicon glyphicon-list"></em> Details
-									</button>
-								</div>
-							</td>
-						</tr>
-					}
-				</tbody>
-			</table>
+			<ul class="list-unstyled">
+				@foreach (var item in Model)
+				{
+					var date = item.Date.ToString("d MMMM yyyy", CultureInfo.CreateSpecificCulture("ru-RU"));
+					<li class="gameList">
+						<div class="btn-group btn-group-xs">
+							<button class="btn btn-warning" type="button" onclick="location.href='@Url.Action("Index", "GameStats", new { id = item.GameId })'">
+								<em class="glyphicon glyphicon-list"></em> @Html.DisplayFor(d => date)
+							</button>
+						</div>
+					</li>
+				}
+			</ul>
 		</div>
 	</div>
 </div>

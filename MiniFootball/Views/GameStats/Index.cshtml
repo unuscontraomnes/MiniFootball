@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MiniFootball.Models.GameStats>
+﻿@using System.Globalization
+@model IEnumerable<MiniFootball.Models.GameStats>
 
 @{
     ViewBag.Title = "Game Statistics";
@@ -6,7 +7,7 @@
 }
 
 @{
-	var date = Model.Select(s => s.Game.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd");
+	var date = Model.Select(s => s.Game.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd", CultureInfo.CreateSpecificCulture("ru-RU"));
 	var firstPlace = Model.Where(f => f.Points == 3).ToList();
 	var secondPlace = Model.Where(s => s.Points == 1).ToList();
 	var thirdPlace = Model.Where(t => t.Points == 0).ToList();
