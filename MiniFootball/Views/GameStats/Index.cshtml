@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
-@model IEnumerable<MiniFootball.Models.GameStats>
+@using UnidecodeSharpFork
+@model IEnumerable<MiniFootball.Models.Result>
 
 @{
     ViewBag.Title = "Game Statistics";
@@ -7,10 +8,7 @@
 }
 
 @{
-	var date = Model.Select(s => s.Game.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd", CultureInfo.CreateSpecificCulture("ru-RU"));
-	var firstPlace = Model.Where(f => f.Points == 3).ToList();
-	var secondPlace = Model.Where(s => s.Points == 1).ToList();
-	var thirdPlace = Model.Where(t => t.Points == 0).ToList();
+	var date = Model.Select(s => s.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd", CultureInfo.CreateSpecificCulture("ru-RU"));
 }
 
 <div class="container-fluid">
@@ -41,80 +39,27 @@
 							Player
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Goals)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Points)
+							Points
 						</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr><th class="team" colspan="3">First Team</th></tr>
-					@foreach (var item in firstPlace)
+				@for (int i = 0; i < Model.Count(); i++)
+				{
+					var players = Model.ElementAt(i).Team.TeamPlayers.Select(tp => tp.Player).ToList();
+					<tr><th class="team" colspan="3">Team @players.FirstOrDefault().LastName.Unidecode()</th></tr>
+					foreach (var item in players)
 					{
 						<tr>
 							<td>
-								@Html.DisplayFor(modelItem => item.Player.Name) @Html.DisplayFor(modelItem => item.Player.Surname)
+								@Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.LastName)
 							</td>
 							<td>
-								@Html.DisplayFor(modelItem => item.Goals)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Points)
+								@Html.DisplayFor(modelItem => Model.ElementAt(i).Points)
 							</td>
 						</tr>
 					}
-					@if (secondPlace.Any())
-					{
-						<tr><th class="team" colspan="3">Second Team</th></tr>
-						foreach (var item in secondPlace)
-						{
-							<tr>
-								<td>
-									@Html.DisplayFor(modelItem => item.Player.Name) @Html.DisplayFor(modelItem => item.Player.Surname)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.Goals)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.Points)
-								</td>
-							</tr>
-						}
-						<tr><th class="team" colspan="3">Third Team</th></tr>
-						foreach (var item in thirdPlace)
-						{
-							<tr>
-								<td>
-									@Html.DisplayFor(modelItem => item.Player.Name) @Html.DisplayFor(modelItem => item.Player.Surname)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.Goals)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.Points)
-								</td>
-							</tr>
-						}
-					}
-					else
-					{
-						<tr><th class="team" colspan="3">Second Team</th></tr>
-						foreach (var item in thirdPlace)
-						{
-							<tr>
-								<td>
-									@Html.DisplayFor(modelItem => item.Player.Name) @Html.DisplayFor(modelItem => item.Player.Surname)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.Goals)
-								</td>
-								<td>
-									@Html.DisplayFor(modelItem => item.Points)
-								</td>
-							</tr>
-						}
-					}
+				}
 				</tbody>
 			</table>
 		</div>

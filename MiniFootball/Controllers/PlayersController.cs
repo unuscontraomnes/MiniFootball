@@ -2,14 +2,13 @@
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
-using System.Linq;
 using MiniFootball.Models;
 
 namespace MiniFootball.Controllers
 {
     public class PlayersController : Controller
     {
-        private readonly ArcadiaFootballEntities db = new ArcadiaFootballEntities();
+        private readonly ArcadiaMiniFootballEntities db = new ArcadiaMiniFootballEntities();
 
         public async Task<ActionResult> Index()
         {
@@ -18,16 +17,9 @@ namespace MiniFootball.Controllers
 
         public async Task<ActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-			var stats = db.Stats.Where(p => p.PlayerId == id).Include(s => s.Player).FirstOrDefaultAsync();
-			if (stats == null)
-            {
-                return HttpNotFound();
-            }
-			return View(await stats);
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+	        var playerStats = db.Players.Include("TeamPlayers").Include("TeamPlayers.Team").Include("TeamPlayers.Team.Results").FirstOrDefaultAsync(w => w.Id == id);
+			return View(await playerStats);
         }
 
         protected override void Dispose(bool disposing)

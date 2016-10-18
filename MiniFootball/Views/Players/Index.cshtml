@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MiniFootball.Models.Players>
+﻿@model IEnumerable<MiniFootball.Models.Player>
 
 @{
     ViewBag.Title = "Arcadia Mini Football Players";
@@ -22,28 +22,28 @@
 				<thead>
 					<tr>
 						<th>
-							@Html.DisplayNameFor(model => model.Name)
+							@Html.DisplayNameFor(model => model.LastName)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Surname)
+							@Html.DisplayNameFor(model => model.Name)
 						</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach (var item in Model)
+					@foreach (var item in Model.OrderBy(s => s.LastName))
 					{
 						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.LastName)
+							</td>
 							<td>
 								@Html.DisplayFor(modelItem => item.Name)
 							</td>
 							<td>
-								@Html.DisplayFor(modelItem => item.Surname)
-							</td>
-							<td>
 							<td>
 								<div class="btn-group btn-group-xs">
-									<button class="btn btn-warning" type="button" onclick="location.href='@Url.Action("Details", "Players", new { id = item.PlayerId })'">
+									<button class="btn btn-warning" type="button" onclick="location.href='@Url.Action("Details", "Players", new { id = item.Id })'">
 										<em class="glyphicon glyphicon-list"></em> Details
 									</button>
 								</div>

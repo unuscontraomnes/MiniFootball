@@ -12,14 +12,13 @@ namespace MiniFootball.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GameStats
+    public partial class Result
     {
-        public int GameId { get; set; }
-        public int PlayerId { get; set; }
-        public int Goals { get; set; }
+        public int Id { get; set; }
+        public int TeamId { get; set; }
+        public System.DateTime Date { get; set; }
         public int Points { get; set; }
     
-        public virtual Games Game { get; set; }
-        public virtual Players Player { get; set; }
+        public virtual Team Team { get; set; }
     }
 }

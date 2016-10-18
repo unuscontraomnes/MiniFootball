@@ -7,11 +7,12 @@ namespace MiniFootball.Controllers
 {
     public class GamesController : Controller
     {
-        private readonly ArcadiaFootballEntities db = new ArcadiaFootballEntities();
+        private readonly ArcadiaMiniFootballEntities db = new ArcadiaMiniFootballEntities();
 
         public async Task<ActionResult> Index()
         {
-            return View(await db.Games.ToListAsync());
+	        var games = db.Results;
+	        return View(await games.ToListAsync());
         }
 
         protected override void Dispose(bool disposing)

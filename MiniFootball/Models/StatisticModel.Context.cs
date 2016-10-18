@@ -13,10 +13,10 @@ namespace MiniFootball.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ArcadiaFootballEntities : DbContext
+    public partial class ArcadiaMiniFootballEntities : DbContext
     {
-        public ArcadiaFootballEntities()
-            : base("name=ArcadiaFootballEntities")
+        public ArcadiaMiniFootballEntities()
+            : base("name=ArcadiaMiniFootballEntities")
         {
         }
     
@@ -25,9 +25,10 @@ namespace MiniFootball.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Games> Games { get; set; }
-        public virtual DbSet<Players> Players { get; set; }
-        public virtual DbSet<GameStats> GameStats { get; set; }
-        public virtual DbSet<Stats> Stats { get; set; }
+        public virtual DbSet<Player> Players { get; set; }
+        public virtual DbSet<Result> Results { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Team> Teams { get; set; }
+        public virtual DbSet<TeamPlayer> TeamPlayers { get; set; }
     }
 }

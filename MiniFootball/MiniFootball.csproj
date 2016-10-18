@@ -120,6 +120,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="UnidecodeSharpFork, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UnidecodeSharpFork.1.0.0\lib\UnidecodeSharpFork.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -137,32 +141,36 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Games.cs">
-      <DependentUpon>PlayersStatsModel.tt</DependentUpon>
+    <Compile Include="Models\Player.cs">
+      <DependentUpon>StatisticModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GameStats.cs">
-      <DependentUpon>PlayersStatsModel.tt</DependentUpon>
+    <Compile Include="Models\Result.cs">
+      <DependentUpon>StatisticModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Players.cs">
-      <DependentUpon>PlayersStatsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PlayersStatsModel.Context.cs">
+    <Compile Include="Models\Statistic.cs" />
+    <Compile Include="Models\StatisticModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PlayersStatsModel.Context.tt</DependentUpon>
+      <DependentUpon>StatisticModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PlayersStatsModel.cs">
+    <Compile Include="Models\StatisticModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PlayersStatsModel.tt</DependentUpon>
+      <DependentUpon>StatisticModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PlayersStatsModel.Designer.cs">
+    <Compile Include="Models\StatisticModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PlayersStatsModel.edmx</DependentUpon>
+      <DependentUpon>StatisticModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Stats.cs">
-      <DependentUpon>PlayersStatsModel.tt</DependentUpon>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>StatisticModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Team.cs">
+      <DependentUpon>StatisticModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TeamPlayer.cs">
+      <DependentUpon>StatisticModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -188,25 +196,18 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\PlayersStatsModel.Context.tt">
+    <Content Include="Models\StatisticModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PlayersStatsModel.Context.cs</LastGenOutput>
-      <DependentUpon>PlayersStatsModel.edmx</DependentUpon>
+      <DependentUpon>StatisticModel.edmx</DependentUpon>
+      <LastGenOutput>StatisticModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PlayersStatsModel.tt">
+    <Content Include="Models\StatisticModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PlayersStatsModel.edmx</DependentUpon>
-      <LastGenOutput>PlayersStatsModel.cs</LastGenOutput>
+      <DependentUpon>StatisticModel.edmx</DependentUpon>
+      <LastGenOutput>StatisticModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\PlayersStatsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PlayersStatsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PlayersStatsModel.edmx.diagram">
-      <DependentUpon>PlayersStatsModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -215,6 +216,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Models\StatisticModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StatisticModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\StatisticModel.edmx.diagram">
+      <DependentUpon>StatisticModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -257,6 +265,7 @@
     <Content Include="Views\Pitch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

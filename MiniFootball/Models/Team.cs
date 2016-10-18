@@ -12,18 +12,21 @@ namespace MiniFootball.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Games
+    public partial class Team
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Games()
+        public Team()
         {
-            this.GameStats = new HashSet<GameStats>();
+            this.Results = new HashSet<Result>();
+            this.TeamPlayers = new HashSet<TeamPlayer>();
         }
     
-        public int GameId { get; set; }
-        public System.DateTime Date { get; set; }
+        public int Id { get; set; }
+        public int IsTemporary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GameStats> GameStats { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeamPlayer> TeamPlayers { get; set; }
     }
 }

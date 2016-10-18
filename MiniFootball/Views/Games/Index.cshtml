@@ -1,5 +1,5 @@
 ﻿@using System.Globalization
-@model IEnumerable<MiniFootball.Models.Games>
+@model IEnumerable<MiniFootball.Models.Result>
 
 @{
     ViewBag.Title = "Games";
@@ -20,12 +20,13 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ul class="list-unstyled">
-				@foreach (var item in Model)
+				@foreach (var item in Model.Select(s => s.Date).Distinct())
 				{
+					var resultId = Model.Where(w => w.Date == item).Select(s => s.Id).FirstOrDefault();
 					var date = item.Date.ToString("d MMMM yyyy", CultureInfo.CreateSpecificCulture("ru-RU"));
 					<li class="gameList">
 						<div class="btn-group btn-group-xs">
-							<button class="btn btn-warning" type="button" onclick="location.href='@Url.Action("Index", "GameStats", new { id = item.GameId })'">
+							<button class="btn btn-warning" type="button" onclick="location.href='@Url.Action("Index", "GameStats", new { id = resultId })'">
 								<em class="glyphicon glyphicon-list"></em> @Html.DisplayFor(d => date)
 							</button>
 						</div>
