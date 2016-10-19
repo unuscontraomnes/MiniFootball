@@ -6,7 +6,9 @@ $(function () {
 
 // Google Maps
 $(document).ready(function () {
-	Initialize();
+	if (window.location.href.indexOf("pitch") !== -1) {
+		Initialize();
+	}
 });
 
 function Initialize() {

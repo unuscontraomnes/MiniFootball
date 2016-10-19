@@ -20,7 +20,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ul class="list-unstyled">
-				@foreach (var item in Model.Select(s => s.Date).Distinct())
+				@foreach (var item in Model.Select(s => s.Date).OrderByDescending(o => o.Date).Distinct())
 				{
 					var resultId = Model.Where(w => w.Date == item).Select(s => s.Id).FirstOrDefault();
 					var date = item.Date.ToString("d MMMM yyyy", CultureInfo.CreateSpecificCulture("ru-RU"));
