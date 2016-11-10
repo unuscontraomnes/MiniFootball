@@ -9,6 +9,13 @@ $(document).ready(function () {
 	if (window.location.href.indexOf("pitch") !== -1) {
 		Initialize();
 	}
+
+	$('*[data-autocomplete-url]')
+			.each(function () {
+				$(this).autocomplete({
+					source: $(this).data("autocomplete-url")
+				});
+			});
 });
 
 function Initialize() {

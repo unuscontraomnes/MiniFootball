@@ -20,38 +20,45 @@
 		<div class="col-md-12">
 			<table class="table">
 				<thead>
-					<tr>
-						<th>#</th>
-						<th>Name</th>
-						<th>Games</th>
-						<th>Points</th>
-						<th>%</th>
-					</tr>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Games</th>
+					<th>Points</th>
+					<th>&Delta;</th>
+				</tr>
 				</thead>
 				<tbody>
-					@for (var i = 0; i < Model.Count(); i++)
-					{
-						var percent = (Model.ElementAt(i).Points * 100) / (Model.ElementAt(i).Games * 3);
-						<tr>
-							<th>
-								@(i + 1)
-							</th>
-							<td>
-								@Html.DisplayFor(modelItem => Model.ElementAt(i).Name) @Html.DisplayFor(modelItem => Model.ElementAt(i).LastName)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => Model.ElementAt(i).Games)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => Model.ElementAt(i).Points)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => percent)
-							</td>
-						</tr>
-					}
+				@for (var i = 0; i < Model.Count(); i++)
+				{
+					<tr>
+						<th>
+							@(i + 1)
+						</th>
+						<td>
+							@Html.DisplayFor(modelItem => Model.ElementAt(i).Name) @Html.DisplayFor(modelItem => Model.ElementAt(i).LastName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => Model.ElementAt(i).Games)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => Model.ElementAt(i).Points)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => Model.ElementAt(i).Rating)
+						</td>
+					</tr>
+				}
 				</tbody>
 			</table>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<img alt="Rating formula" src="~/Content/images/rating_formula.png" />
+			</div>
 		</div>
 	</div>
 </div>

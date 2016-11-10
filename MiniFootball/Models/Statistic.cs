@@ -6,5 +6,6 @@
 		public string LastName { get; set; }
 		public int Games { get; set; }
 		public int Points { get; set; }
+		public decimal Rating { get; set; }
 	}
 }
