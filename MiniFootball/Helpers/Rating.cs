@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using MiniFootball.Models;
 
-namespace MiniFootball.Models
+namespace MiniFootball.Helpers
 {
 	public static class Rating
 	{
-		public static List<Statistic> GetRating(ArcadiaMiniFootballEntities db)
+		public static List<Statistic> GetRating(IQueryable<Player> players)
 		{
-			var playerIdList = db.TeamPlayers.Where(w => w.Team.IsTemporary == 0).Select(s => s.PlayerId).Distinct().ToList();
-			var players = db.TeamPlayers.Include(i => i.Player).Include(i => i.Team).Include(i => i.Team.Results).Select(s => s.Player).Distinct().Where(w => playerIdList.Contains(w.Id));
 			var statistic = new List<Statistic>();
 
 			foreach (var player in players)
@@ -29,28 +27,30 @@ namespace MiniFootball.Models
 
 				foreach (var month in months)
 				{
-					double monthRating;
-					var index = 1 - (DateTime.Now.Month - month.Month) * 0.1;
-					var teams = player.TeamPlayers.Where(w => w.Team.IsTemporary == 0);
-					var results = teams.Select(s => s.Team.Results).FirstOrDefault();
-					var monthPoints = results.Where(w => w.Date.Year == month.Year && w.Date.Month == month.Month).Sum(p => p.Points);
+					decimal monthRating;
+					var index = (decimal)(1 - Math.Abs((DateTime.Now.Month - month.Month) + 12 * (DateTime.Now.Year - month.Year)) * 0.1);
+					var teams = player.TeamPlayers.Where(w => w.Team.IsTemporary == 0).ToList();
+					var results = teams.Select(s => s.Team.Results.FirstOrDefault());
+					var monthResults = results.Where(w => w.Date.Year == month.Year && w.Date.Month == month.Month).ToList();
+					var monthPoints = monthResults.Sum(p => p.Points);
 
-					if (index < 0.1)
+					if (index < (decimal)0.1)
 					{
-						monthRating = monthPoints * 0.1;
+						monthRating = (decimal)monthPoints / monthResults.Count * (decimal)0.1;
 					}
 					else
 					{
-						monthRating = monthPoints * index;
+						monthRating = (decimal)monthPoints / monthResults.Count * index;
 					}
 
 					stats.Rating = stats.Rating + monthRating;
 				}
 
+				stats.Rating = Math.Round(stats.Rating, 2, MidpointRounding.AwayFromZero);
 				statistic.Add(stats);
 			}
 
-			return statistic.OrderByDescending(o => o.Rating).ToList();
+			return statistic.OrderByDescending(o => o.Rating).ThenByDescending(t => t.Points).ThenBy(d => d.Games).ToList();
 		}
 	}
 }

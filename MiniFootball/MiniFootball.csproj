@@ -131,7 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\rating_formula.png" />
-    <Content Include="Models\Rating.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -140,6 +139,7 @@
     <Compile Include="Controllers\GeneratorController.cs" />
     <Compile Include="Controllers\PitchController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Helpers\Rating.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
