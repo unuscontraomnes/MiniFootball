@@ -29,9 +29,10 @@ namespace MiniFootball.Helpers
 				{
 					decimal monthRating;
 					var index = (decimal)(1 - Math.Abs((DateTime.Now.Month - month.Month) + 12 * (DateTime.Now.Year - month.Year)) * 0.1);
-					var teams = player.TeamPlayers.Where(w => w.Team.IsTemporary == 0).ToList();
-					var results = teams.Select(s => s.Team.Results.FirstOrDefault());
-					var monthResults = results.Where(w => w.Date.Year == month.Year && w.Date.Month == month.Month).ToList();
+					var monthResults = player.TeamPlayers
+						.Where(w => w.Team.IsTemporary == 0)
+						.Select(s => s.Team.Results.FirstOrDefault())
+						.Where(w => w.Date.Year == month.Year && w.Date.Month == month.Month).ToList();
 					var monthPoints = monthResults.Sum(p => p.Points);
 
 					if (index < (decimal)0.1)
