@@ -18,6 +18,7 @@ namespace MiniFootball.Helpers
 
 				var stats = new Statistic
 				{
+					Id = player.Id,
 					Name = player.Name,
 					LastName = player.LastName,
 					Games = player.TeamPlayers.Count(w => w.Team.IsTemporary == 0),
