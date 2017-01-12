@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MiniFootball.ViewModels.GeneratorViewModel
+
+@{
 	ViewBag.Title = "Team generator";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -19,14 +21,20 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-					<form role="form">
-						<div class="form-group">
-							<label for="playersId">Players Ids</label>
-							<input type="text" class="form-control" id="playersId" name="playersId"/>
-						</div>
+					<div class="form-group">
+						@for (var i = 0; i < Model.CheckedPlayers.Count; i++)
+						{
+							@Html.HiddenFor(model => model.CheckedPlayers[i].Id)
+							@Html.HiddenFor(model => model.CheckedPlayers[i].Name)
+							<label>
+								@Html.CheckBoxFor(model => model.CheckedPlayers[i].IsChecked)
+								@Html.DisplayFor(model => model.CheckedPlayers[i].Name)
+							</label>
+							<br />
+						}
 
 						<input type="submit" value="Generate" class="btn btn-success" />
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>

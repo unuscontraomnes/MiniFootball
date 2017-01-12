@@ -1,0 +1,74 @@
+﻿@using System.Globalization
+@using UnidecodeSharpFork
+@model MiniFootball.ViewModels.ResultsViewModel
+
+@{
+	ViewBag.Title = "Game Statistics";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>
+					Game Statistics<br />
+				</h1>
+			</div>
+		</div>
+	</div>
+	
+	@using (Html.BeginForm())
+	{
+		<div class="row">
+			<div class="col-md-12">
+				<h3>
+					@Html.EditorFor(model => model.Results.ElementAt(0).Date, new { htmlAttributes = new {Value = Model.Results.ElementAt(0).Date.ToString("d MMMM yyyy, dddd", CultureInfo.CreateSpecificCulture("ru-RU")), @class = "form-control datepicker", PlaceHolder = "Enter Date of Game" } })
+				</h3>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+					<tr>
+						<th>
+							Player
+						</th>
+						<th>
+							Points
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+					@for (var i = 0; i < Model.Results.Count; i++)
+					{
+						var players = Model.Results.ElementAt(i).Team.TeamPlayers.Select(tp => tp.Player).ToList();
+						<tr><th class="team" colspan="3">Team @players.FirstOrDefault().LastName.Unidecode()</th></tr>
+						foreach (var item in players)
+						{
+							<tr>
+								<td>
+									@Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.LastName)
+								</td>
+								<td>
+									@Html.EditorFor(modelItem => Model.Results.ElementAt(i).Points)
+								</td>
+							</tr>
+						}
+					}
+					</tbody>
+				</table>
+				
+				<label class="gameEdit">
+					@Html.CheckBoxFor(model => model.IsActiveGame)
+					Is Game Active
+				</label>
+				<br/>
+
+				<input type="submit" value="Save" class="btn btn-success" />
+			</div>
+		</div>
+	}
+</div>

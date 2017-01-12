@@ -1,6 +1,6 @@
 ﻿@using System.Globalization
 @using UnidecodeSharpFork
-@model IEnumerable<MiniFootball.Models.Result>
+@model MiniFootball.ViewModels.ResultsViewModel
 
 @{
     ViewBag.Title = "Game Statistics";
@@ -8,7 +8,7 @@
 }
 
 @{
-	var date = Model.Select(s => s.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd", CultureInfo.CreateSpecificCulture("ru-RU"));
+	var date = Model.Results.Select(s => s.Date).FirstOrDefault().ToString("d MMMM yyyy, dddd", CultureInfo.CreateSpecificCulture("ru-RU"));
 }
 
 <div class="container-fluid">
@@ -44,9 +44,9 @@
 					</tr>
 				</thead>
 				<tbody>
-				@for (int i = 0; i < Model.Count(); i++)
+				@for (var i = 0; i < Model.Results.Count; i++)
 				{
-					var players = Model.ElementAt(i).Team.TeamPlayers.Select(tp => tp.Player).ToList();
+					var players = Model.Results.ElementAt(i).Team.TeamPlayers.Select(tp => tp.Player).ToList();
 					<tr><th class="team" colspan="3">Team @players.FirstOrDefault().LastName.Unidecode()</th></tr>
 					foreach (var item in players)
 					{
@@ -55,7 +55,7 @@
 								@Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.LastName)
 							</td>
 							<td>
-								@Html.DisplayFor(modelItem => Model.ElementAt(i).Points)
+								@Html.DisplayFor(modelItem => Model.Results.ElementAt(i).Points)
 							</td>
 						</tr>
 					}

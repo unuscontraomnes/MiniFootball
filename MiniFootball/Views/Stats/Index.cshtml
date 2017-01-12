@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MiniFootball.Models.Statistic>
+﻿@model MiniFootball.ViewModels.StatsViewModel
 
 @{
     ViewBag.Title = "Arcadia Mini Football Players Statistics";
@@ -29,23 +29,23 @@
 				</tr>
 				</thead>
 				<tbody>
-				@for (var i = 0; i < Model.Count(); i++)
+				@for (var i = 0; i < Model.Statistics.Count; i++)
 				{
 					<tr>
 						<th>
 							@(i + 1)
 						</th>
 						<td>
-							@Html.DisplayFor(modelItem => Model.ElementAt(i).Name) @Html.DisplayFor(modelItem => Model.ElementAt(i).LastName)
+							@Html.DisplayFor(modelItem => Model.Statistics[i].Name) @Html.DisplayFor(modelItem => Model.Statistics[i].LastName)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => Model.ElementAt(i).Games)
+							@Html.DisplayFor(modelItem => Model.Statistics[i].Games)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => Model.ElementAt(i).Points)
+							@Html.DisplayFor(modelItem => Model.Statistics[i].Points)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => Model.ElementAt(i).Rating)
+							@Html.DisplayFor(modelItem => Model.Statistics[i].Rating)
 						</td>
 					</tr>
 				}

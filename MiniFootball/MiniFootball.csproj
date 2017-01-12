@@ -130,6 +130,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CheckedPlayers.cs" />
+    <Compile Include="ViewModels\GeneratorViewModel.cs" />
+    <Compile Include="ViewModels\ResultsViewModel.cs" />
+    <Compile Include="ViewModels\StatsViewModel.cs" />
     <Content Include="Content\images\rating_formula.png" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -268,6 +272,9 @@
     <Content Include="Views\GameStats\Index.cshtml" />
     <Content Include="Views\Pitch\Index.cshtml" />
     <Content Include="Views\Generator\Index.cshtml" />
+    <Content Include="Views\Players\Edit.cshtml" />
+    <Content Include="Views\Players\Create.cshtml" />
+    <Content Include="Views\GameStats\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
